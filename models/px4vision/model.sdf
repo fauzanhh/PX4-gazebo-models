@@ -178,6 +178,7 @@
       <velocity_decay/>
     </link>
     <joint name='rotor_0_joint' type='revolute'>
+      <pose relative_to='rotor_0'/>
       <child>rotor_0</child>
       <parent>base_link</parent>
       <axis>
