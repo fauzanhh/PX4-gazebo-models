@@ -60,8 +60,10 @@
             <pose>0 0 0 0 0 0</pose>
             <self_collide>false</self_collide>
             <static>false</static>
+
+            <!-- Base link -->
             <link name='base_link'>
-                <pose>0 0 0.5 0 0 0</pose>
+                <pose>0 0 1.5 0 0 0</pose>
                 <inertial>
                     <mass>2</mass>
                     <inertia>
@@ -78,7 +80,7 @@
                 <collision name='base_link0'>
                     <geometry>
                         <box>
-                            <size>2.0 2.0 0.5</size>
+                            <size>2.0 2.0 0.25</size>
                         </box>
                     </geometry>
                     <surface>
@@ -96,7 +98,7 @@
                 <visual name='base_link_visual'>
                     <geometry>
                         <box>
-                            <size>2.0 2.0 0.5</size>
+                            <size>2.0 2.0 0.25</size>
                         </box>
                     </geometry>
                     <material>
@@ -105,6 +107,8 @@
                         <specular>0.0 0.0 1.0 1</specular>
                     </material>
                 </visual>
+
+                <!-- Sensors for model -->
                 <sensor name="air_pressure_sensor" type="air_pressure">
                     <always_on>1</always_on>
                     <update_rate>50</update_rate>
@@ -180,8 +184,10 @@
                     <update_rate>30</update_rate>
                 </sensor>
             </link>
+            
+            <!-- Swashplate links -->
             <link name='swashplate_0'>
-                <pose relative_to='base_link'>0 0 1 0 0 0</pose>
+                <pose relative_to='base_link'>0 0 0.25 0 0 0</pose>
                 <inertial>
                     <mass>2</mass>
                     <inertia>
@@ -199,7 +205,7 @@
                     <geometry>
                         <cylinder>
                             <radius>0.1</radius>
-                            <length>1.5</length>
+                            <length>0.5</length>
                         </cylinder>
                     </geometry>
                     <surface>
@@ -218,7 +224,55 @@
                     <geometry>
                         <cylinder>
                             <radius>0.1</radius>
-                            <length>1.5</length>
+                            <length>0.5</length>
+                        </cylinder>
+                    </geometry>
+                    <material>
+                        <ambient>0.0 1.0 0 1</ambient>
+                        <diffuse>0.0 1.0 0 1</diffuse>
+                        <specular>0.0 1.0 0 1</specular>
+                    </material>
+                </visual>
+            </link>
+            <link name='swashplate_1'>
+                <pose relative_to='base_link'>0 0 -0.25 0 -3.14 0</pose>
+                <inertial>
+                    <mass>2</mass>
+                    <inertia>
+                        <ixx>0.02</ixx>
+                        <ixy>0</ixy>
+                        <ixz>0</ixz>
+                        <iyy>0.02</iyy>
+                        <iyz>0</iyz>
+                        <izz>0.02</izz>
+                    </inertia>
+                </inertial>
+                <gravity>true</gravity>
+                <velocity_decay/>
+                <collision name='collision_swashplate_1'>
+                    <geometry>
+                        <cylinder>
+                            <radius>0.1</radius>
+                            <length>0.5</length>
+                        </cylinder>
+                    </geometry>
+                    <surface>
+                    <contact>
+                        <ode>
+                            <min_depth>0.001</min_depth>
+                            <max_vel>0</max_vel>
+                            </ode>
+                    </contact>
+                    <friction>
+                        <ode/>
+                    </friction>
+                </surface>
+                </collision>
+                <visual name='visual_swashplate_1'>
+                    <geometry>
+                        <cylinder>
+                            <radius>0.1</radius>
+                            <length>0.5</length>
                         </cylinder>
                     </geometry>
                     <material>
@@ -229,8 +283,10 @@
                 </visual>
             </link>
 
+
+            <!-- Rotors link -->
             <link name='rotor_0'>
-                <pose relative_to='swashplate_0'>0 0 0.75 0 0 0</pose>
+                <pose relative_to='swashplate_0'>0 0 0.25 0 0 0</pose>
                 <inertial>
                     <mass>0.005</mass>
                     <inertia>
@@ -246,7 +302,7 @@
                     <geometry>
                         <cylinder>
                             <length>0.005</length>
-                            <radius>0.064</radius>
+                            <radius>0.75</radius>
                         </cylinder>
                     </geometry>
                     <surface>
@@ -262,7 +318,7 @@
                     <geometry>
                         <cylinder>
                             <length>0.005</length>
-                            <radius>1</radius>
+                            <radius>0.75</radius>
                         </cylinder>
                     </geometry>
                     <material>
@@ -274,9 +330,290 @@
                 <gravity>1</gravity>
                 <velocity_decay/>
             </link>
+            <link name='rotor_1'>
+                <pose relative_to='swashplate_1'>0 0 0.25 0 0 0</pose>
+                <inertial>
+                    <mass>0.005</mass>
+                    <inertia>
+                        <ixx>9.75e-07</ixx>
+                        <ixy>0</ixy>
+                        <ixz>0</ixz>
+                        <iyy>0.000273104</iyy>
+                        <iyz>0</iyz>
+                        <izz>0.000274004</izz>
+                    </inertia>
+                </inertial>
+                <collision name='rotor_1_collision'>
+                    <geometry>
+                        <cylinder>
+                            <length>0.005</length>
+                            <radius>0.75</radius>
+                        </cylinder>
+                    </geometry>
+                    <surface>
+                        <contact>
+                            <ode/>
+                        </contact>
+                        <friction>
+                            <ode/>
+                        </friction>
+                    </surface>
+                </collision>
+                <visual name='rotor_1_visual'>
+                    <geometry>
+                        <cylinder>
+                            <length>0.005</length>
+                            <radius>0.75</radius>
+                        </cylinder>
+                    </geometry>
+                    <material>
+                        <ambient>1.0 0.0 0 1</ambient>
+                        <diffuse>1.0 0.0 0 1</diffuse>
+                        <specular>1.0 0.0 0 1</specular>
+                    </material>
+                </visual>
+                <gravity>1</gravity>
+                <velocity_decay/>
+            </link>
+
+            <!-- Legs link -->
+            <link name='leg_0'>
+                <pose relative_to='base_link'>0.75 0.75 -0.5 0 0 0</pose>
+                <inertial>
+                    <mass>0.005</mass>
+                    <inertia>
+                        <ixx>9.75e-07</ixx>
+                        <ixy>0</ixy>
+                        <ixz>0</ixz>
+                        <iyy>0.000273104</iyy>
+                        <iyz>0</iyz>
+                        <izz>0.000274004</izz>
+                    </inertia>
+                </inertial>
+                <collision name='leg_0_collision'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <surface>
+                        <contact>
+                            <ode/>
+                        </contact>
+                        <friction>
+                            <ode/>
+                        </friction>
+                    </surface>
+                </collision>
+                <visual name='leg_0_visual'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <material>
+                        <ambient>1.0 0.0 0 1</ambient>
+                        <diffuse>1.0 0.0 0 1</diffuse>
+                        <specular>1.0 0.0 0 1</specular>
+                    </material>
+                </visual>
+                <gravity>1</gravity>
+                <velocity_decay/>
+            </link>
+            <link name='leg_1'>
+                <pose relative_to='base_link'>0.75 -0.75 -0.5 0 0 0</pose>
+                <inertial>
+                    <mass>0.005</mass>
+                    <inertia>
+                        <ixx>9.75e-07</ixx>
+                        <ixy>0</ixy>
+                        <ixz>0</ixz>
+                        <iyy>0.000273104</iyy>
+                        <iyz>0</iyz>
+                        <izz>0.000274004</izz>
+                    </inertia>
+                </inertial>
+                <collision name='leg_1_collision'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <surface>
+                        <contact>
+                            <ode/>
+                        </contact>
+                        <friction>
+                            <ode/>
+                        </friction>
+                    </surface>
+                </collision>
+                <visual name='leg_1_visual'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <material>
+                        <ambient>1.0 0.0 0 1</ambient>
+                        <diffuse>1.0 0.0 0 1</diffuse>
+                        <specular>1.0 0.0 0 1</specular>
+                    </material>
+                </visual>
+                <gravity>1</gravity>
+                <velocity_decay/>
+            </link>
+            <link name='leg_2'>
+                <pose relative_to='base_link'>-0.75 0.75 -0.5 0 0 0</pose>
+                <inertial>
+                    <mass>0.005</mass>
+                    <inertia>
+                        <ixx>9.75e-07</ixx>
+                        <ixy>0</ixy>
+                        <ixz>0</ixz>
+                        <iyy>0.000273104</iyy>
+                        <iyz>0</iyz>
+                        <izz>0.000274004</izz>
+                    </inertia>
+                </inertial>
+                <collision name='leg_2_collision'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <surface>
+                        <contact>
+                            <ode/>
+                        </contact>
+                        <friction>
+                            <ode/>
+                        </friction>
+                    </surface>
+                </collision>
+                <visual name='leg_2_visual'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <material>
+                        <ambient>1.0 0.0 0 1</ambient>
+                        <diffuse>1.0 0.0 0 1</diffuse>
+                        <specular>1.0 0.0 0 1</specular>
+                    </material>
+                </visual>
+                <gravity>1</gravity>
+                <velocity_decay/>
+            </link>
+            <link name='leg_3'>
+                <pose relative_to='base_link'>-0.75 -0.75 -0.5 0 0 0</pose>
+                <inertial>
+                    <mass>0.005</mass>
+                    <inertia>
+                        <ixx>9.75e-07</ixx>
+                        <ixy>0</ixy>
+                        <ixz>0</ixz>
+                        <iyy>0.000273104</iyy>
+                        <iyz>0</iyz>
+                        <izz>0.000274004</izz>
+                    </inertia>
+                </inertial>
+                <collision name='leg_3_collision'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <surface>
+                        <contact>
+                            <ode/>
+                        </contact>
+                        <friction>
+                            <ode/>
+                        </friction>
+                    </surface>
+                </collision>
+                <visual name='leg_3_visual'>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.1 1</size>
+                        </box>
+                    </geometry>
+                    <material>
+                        <ambient>1.0 0.0 0 1</ambient>
+                        <diffuse>1.0 0.0 0 1</diffuse>
+                        <specular>1.0 0.0 0 1</specular>
+                    </material>
+                </visual>
+                <gravity>1</gravity>
+                <velocity_decay/>
+            </link>
+
+            <!-- Joints -->
             <joint name='base_to_swashplate_0' type='fixed'>
                 <pose relative_to='swashplate_0'/>
                 <child>swashplate_0</child>
+                <parent>base_link</parent>
+                <axis>
+                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+            <joint name='base_to_swashplate_1' type='fixed'>
+                <pose relative_to='swashplate_1'/>
+                <child>swashplate_1</child>
+                <parent>base_link</parent>
+                <axis>
+                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+             <joint name='base_to_leg_0' type='fixed'>
+                <pose relative_to='leg_0'/>
+                <child>leg_0</child>
+                <parent>base_link</parent>
+                <axis>
+                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+             <joint name='base_to_leg_1' type='fixed'>
+                <pose relative_to='leg_1'/>
+                <child>leg_1</child>
+                <parent>base_link</parent>
+                <axis>
+                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+             <joint name='base_to_leg_2' type='fixed'>
+                <pose relative_to='leg_2'/>
+                <child>leg_2</child>
+                <parent>base_link</parent>
+                <axis>
+                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+             <joint name='base_to_leg_3' type='fixed'>
+                <pose relative_to='leg_3'/>
+                <child>leg_3</child>
                 <parent>base_link</parent>
                 <axis>
                     <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
@@ -290,6 +627,22 @@
                 <pose relative_to='rotor_0'/>
                 <child>rotor_0</child>
                 <parent>swashplate_0</parent>
+                <axis>
+                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                    <dynamics>
+                        <spring_reference>0</spring_reference>
+                        <spring_stiffness>0</spring_stiffness>
+                    </dynamics>
+                </axis>
+            </joint>
+            <joint name='rotor_1_joint' type='revolute'>
+                <pose relative_to='rotor_1'/>
+                <child>rotor_1</child>
+                <parent>swashplate_1</parent>
                 <axis>
                     <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
                     <limit>
