@@ -65,22 +65,22 @@
             <link name='base_link'>
                 <pose>0 0 1.5 0 0 0</pose>
                 <inertial>
-                    <mass>2</mass>
+                    <mass>0.1</mass>
                     <inertia>
-                        <ixx>0.02</ixx>
+                        <ixx>0.029125</ixx>
                         <ixy>0</ixy>
                         <ixz>0</ixz>
-                        <iyy>0.02</iyy>
+                        <iyy>0.029125</iyy>
                         <iyz>0</iyz>
-                        <izz>0.02</izz>
+                        <izz>0.055225</izz>
                     </inertia>
                 </inertial>
                 <gravity>true</gravity>
                 <velocity_decay/>
-                <collision name='base_link0'>
+                <collision name='base_link_collision'>
                     <geometry>
                         <box>
-                            <size>2.0 2.0 0.25</size>
+                            <size>0.5 0.5 0.5</size>
                         </box>
                     </geometry>
                     <surface>
@@ -98,7 +98,7 @@
                 <visual name='base_link_visual'>
                     <geometry>
                         <box>
-                            <size>2.0 2.0 0.25</size>
+                            <size>0.5 0.5 0.5</size>
                         </box>
                     </geometry>
                     <material>
@@ -189,7 +189,7 @@
             <link name='swashplate_0'>
                 <pose relative_to='base_link'>0 0 0.25 0 0 0</pose>
                 <inertial>
-                    <mass>2</mass>
+                    <mass>0.00000001</mass>
                     <inertia>
                         <ixx>0.02</ixx>
                         <ixy>0</ixy>
@@ -235,9 +235,9 @@
                 </visual>
             </link>
             <link name='swashplate_1'>
-                <pose relative_to='base_link'>0 0 -0.25 0 -3.14 0</pose>
+                <pose relative_to='base_link'>0 0 0.5 0 0 0</pose>
                 <inertial>
-                    <mass>2</mass>
+                    <mass>0.00000001</mass>
                     <inertia>
                         <ixx>0.02</ixx>
                         <ixy>0</ixy>
@@ -252,8 +252,8 @@
                 <collision name='collision_swashplate_1'>
                     <geometry>
                         <cylinder>
-                            <radius>0.1</radius>
-                            <length>0.5</length>
+                            <radius>0.05</radius>
+                            <length>1</length>
                         </cylinder>
                     </geometry>
                     <surface>
@@ -271,8 +271,8 @@
                 <visual name='visual_swashplate_1'>
                     <geometry>
                         <cylinder>
-                            <radius>0.1</radius>
-                            <length>0.5</length>
+                            <radius>0.05</radius>
+                            <length>1</length>
                         </cylinder>
                     </geometry>
                     <material>
@@ -302,12 +302,15 @@
                     <geometry>
                         <cylinder>
                             <length>0.005</length>
-                            <radius>0.75</radius>
+                            <radius>0.128</radius>
                         </cylinder>
                     </geometry>
                     <surface>
                         <contact>
-                            <ode/>
+                            <ode>
+                                <min_depth>0.001</min_depth>
+                                <max_vel>0</max_vel>
+                            </ode>
                         </contact>
                         <friction>
                             <ode/>
@@ -331,7 +334,7 @@
                 <velocity_decay/>
             </link>
             <link name='rotor_1'>
-                <pose relative_to='swashplate_1'>0 0 0.25 0 0 0</pose>
+                <pose relative_to='swashplate_1'>0 0 0.5 0 0 0</pose>
                 <inertial>
                     <mass>0.005</mass>
                     <inertia>
@@ -347,12 +350,15 @@
                     <geometry>
                         <cylinder>
                             <length>0.005</length>
-                            <radius>0.75</radius>
+                            <radius>0.128</radius>
                         </cylinder>
                     </geometry>
                     <surface>
                         <contact>
-                            <ode/>
+                            <ode>
+                                <min_depth>0.001</min_depth>
+                                <max_vel>0</max_vel>
+                            </ode>
                         </contact>
                         <friction>
                             <ode/>
@@ -377,10 +383,10 @@
             </link>
 
             <!-- Legs link -->
-            <link name='leg_0'>
+            <!-- <link name='leg_0'>
                 <pose relative_to='base_link'>0.75 0.75 -0.5 0 0 0</pose>
                 <inertial>
-                    <mass>0.005</mass>
+                    <mass>0.000005</mass>
                     <inertia>
                         <ixx>9.75e-07</ixx>
                         <ixy>0</ixy>
@@ -423,7 +429,7 @@
             <link name='leg_1'>
                 <pose relative_to='base_link'>0.75 -0.75 -0.5 0 0 0</pose>
                 <inertial>
-                    <mass>0.005</mass>
+                    <mass>0.000005</mass>
                     <inertia>
                         <ixx>9.75e-07</ixx>
                         <ixy>0</ixy>
@@ -466,7 +472,7 @@
             <link name='leg_2'>
                 <pose relative_to='base_link'>-0.75 0.75 -0.5 0 0 0</pose>
                 <inertial>
-                    <mass>0.005</mass>
+                    <mass>0.000005</mass>
                     <inertia>
                         <ixx>9.75e-07</ixx>
                         <ixy>0</ixy>
@@ -509,7 +515,7 @@
             <link name='leg_3'>
                 <pose relative_to='base_link'>-0.75 -0.75 -0.5 0 0 0</pose>
                 <inertial>
-                    <mass>0.005</mass>
+                    <mass>0.000005</mass>
                     <inertia>
                         <ixx>9.75e-07</ixx>
                         <ixy>0</ixy>
@@ -548,7 +554,7 @@
                 </visual>
                 <gravity>1</gravity>
                 <velocity_decay/>
-            </link>
+            </link> -->
 
             <!-- Joints -->
             <joint name='base_to_swashplate_0' type='fixed'>
@@ -575,7 +581,7 @@
                     </limit>
                 </axis>
             </joint>
-             <joint name='base_to_leg_0' type='fixed'>
+            <!-- <joint name='base_to_leg_0' type='fixed'>
                 <pose relative_to='leg_0'/>
                 <child>leg_0</child>
                 <parent>base_link</parent>
@@ -587,7 +593,7 @@
                     </limit>
                 </axis>
             </joint>
-             <joint name='base_to_leg_1' type='fixed'>
+                <joint name='base_to_leg_1' type='fixed'>
                 <pose relative_to='leg_1'/>
                 <child>leg_1</child>
                 <parent>base_link</parent>
@@ -599,7 +605,7 @@
                     </limit>
                 </axis>
             </joint>
-             <joint name='base_to_leg_2' type='fixed'>
+                <joint name='base_to_leg_2' type='fixed'>
                 <pose relative_to='leg_2'/>
                 <child>leg_2</child>
                 <parent>base_link</parent>
@@ -611,7 +617,7 @@
                     </limit>
                 </axis>
             </joint>
-             <joint name='base_to_leg_3' type='fixed'>
+                <joint name='base_to_leg_3' type='fixed'>
                 <pose relative_to='leg_3'/>
                 <child>leg_3</child>
                 <parent>base_link</parent>
@@ -622,13 +628,13 @@
                         <upper>1e+16</upper>
                     </limit>
                 </axis>
-            </joint>
+            </joint> -->
             <joint name='rotor_0_joint' type='revolute'>
                 <pose relative_to='rotor_0'/>
                 <child>rotor_0</child>
                 <parent>swashplate_0</parent>
                 <axis>
-                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <xyz expressed_in="__model__">0 0 1</xyz>
                     <limit>
                         <lower>-1e+16</lower>
                         <upper>1e+16</upper>
@@ -644,7 +650,7 @@
                 <child>rotor_1</child>
                 <parent>swashplate_1</parent>
                 <axis>
-                    <xyz expressed_in="__model__">-0.788675  0.211325   0.57735</xyz>
+                    <xyz expressed_in="__model__">0 0 1</xyz>
                     <limit>
                         <lower>-1e+16</lower>
                         <upper>1e+16</upper>
@@ -655,6 +661,40 @@
                     </dynamics>
                 </axis>
             </joint>
+
+            <!-- Plugins -->
+            <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+                <jointName>rotor_0_joint</jointName>
+                <linkName>rotor_0</linkName>
+                <turningDirection>cw</turningDirection>
+                <timeConstantUp>0.0125</timeConstantUp>
+                <timeConstantDown>0.025</timeConstantDown>
+                <maxRotVelocity>1000</maxRotVelocity>
+                <motorConstant>8.54858e-06</motorConstant>
+                <momentConstant>0.06</momentConstant>
+                <commandSubTopic>command/motor_speed</commandSubTopic>
+                <motorNumber>0</motorNumber>
+                <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+                <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+                <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+                <motorType>velocity</motorType>
+            </plugin>
+            <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+                <jointName>rotor_1_joint</jointName>
+                <linkName>rotor_1</linkName>
+                <turningDirection>ccw</turningDirection>
+                <timeConstantUp>0.0125</timeConstantUp>
+                <timeConstantDown>0.025</timeConstantDown>
+                <maxRotVelocity>1000</maxRotVelocity>
+                <motorConstant>8.54858e-06</motorConstant>
+                <momentConstant>0.06</momentConstant>
+                <commandSubTopic>command/motor_speed</commandSubTopic>
+                <motorNumber>1</motorNumber>
+                <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+                <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+                <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+                <motorType>velocity</motorType>
+            </plugin>
         </model>
     </world>
 </sdf>
